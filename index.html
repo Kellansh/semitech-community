@@ -281,7 +281,7 @@
             
             <div class="calendar-iframe-container">
                 <iframe 
-                    id="calendar-iframe"
+                    id="month-view"
                     src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDetroit&showPrint=0&mode=MONTH&title=SE%20MI%20Tech&showCalendars=0&src=NDlkNzM4NjkyNmMwNjEyMjJlMzlmYjkzNWE1YjViYTFhNDdmNDU3ZDg2Y2JjNzYwMmIyOGUxOWE5NDBiNmJiMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%239e69af" 
                     style="border-width:0" 
                     frameborder="0" 
@@ -291,7 +291,7 @@
 
             <div class="calendar-iframe-container">
                 <iframe 
-                    id="calendar-iframe"
+                    id="list-view"
                     src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDetroit&showPrint=0&mode=AGENDA&title=SE%20MI%20Tech&showCalendars=0&src=NDlkNzM4NjkyNmMwNjEyMjJlMzlmYjkzNWE1YjViYTFhNDdmNDU3ZDg2Y2JjNzYwMmIyOGUxOWE5NDBiNmJiMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%239e69af" 
                     style="border-width:0" 
                     frameborder="0" 
@@ -346,19 +346,21 @@
         }
 
         function toggleView(view) {
-            const calendarIframe = document.getElementById('calendar-iframe');
+            const monthView = document.getElementById('month-view');
             const listView = document.getElementById('list-view');
             const buttons = document.querySelectorAll('.view-btn');
 
             buttons.forEach(btn => btn.classList.remove('active'));
             
             if (view === 'calendar') {
-                calendarIframe.parentElement.style.display = 'block';
-                listView.classList.remove('active');
+                monthView.parentElement.style.display = 'block';
+                listView.parentElement.style.display = 'none';
                 buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
             } else {
-                calendarIframe.parentElement.style.display = 'none';
-                listView.classList.add('active');
+                monthView.parentElement.style.display = 'none';
+                listView.parentElement.style.display = 'block';
+                buttons[0].classList.remove('active');
                 buttons[1].classList.add('active');
             }
         }
