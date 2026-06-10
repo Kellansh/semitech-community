@@ -285,12 +285,12 @@
             buttons.forEach(btn => btn.classList.remove('active'));
             
             if (view === 'calendar') {
-                monthView.parentElement.style.display = 'block';
+                calendarView.parentElement.style.display = 'block';
                 listView.parentElement.style.display = 'none';
                 buttons[0].classList.add('active');
                 buttons[1].classList.remove('active');
             } else {
-                monthView.parentElement.style.display = 'none';
+                calendarView.parentElement.style.display = 'none';
                 listView.parentElement.style.display = 'block';
                 buttons[0].classList.remove('active');
                 buttons[1].classList.add('active');
