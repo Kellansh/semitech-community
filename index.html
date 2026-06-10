@@ -1,35 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SEMI Tech Community</title>
     <meta name="description" content="SEMI Tech Community Calendar">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
+    <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background: #f5f5f5;
             color: #333;
         }
 
-        .container {
+        .title {
             display: flex;
-            min-height: 100vh;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 200px;
+        .toggle-sidebar {
             background: #2c3e50;
             color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-bottom: 16px;
+        }
+
+        .toggle-sidebar:hover {
+            background: #34495e;
+        }
+
+        .sidebar {
+            width: 150px;
+            background: #2c3e50;
+            color: #ffffff;
             padding: 20px;
-            transition: width 0.3s ease;
+            transition: opacity 0.2s ease;
             position: fixed;
             height: 100vh;
             right: 0;
@@ -39,17 +50,6 @@
         }
 
         .sidebar.collapsed {
-            width: 64px;
-            /* padding: 20px 8px; */
-        }
-
-        .sidebar h2 {
-            margin-bottom: 30px;
-            font-size: 1.5em;
-            transition: opacity 0.3s ease;
-        }
-
-        .sidebar.collapsed h2 {
             opacity: 0;
             visibility: hidden;
             height: 0;
@@ -64,14 +64,11 @@
         }
 
         .sidebar nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
             color: white;
             text-decoration: none;
             border-radius: 4px;
-            transition: background 0.2s;
+            border: 3px solid white;
+            padding: 10px;
             cursor: pointer;
             white-space: nowrap;
         }
@@ -84,92 +81,37 @@
             background: #3498db;
         }
 
-        .sidebar .icon {
-            display: inline-flex;
-            width: 24px;
-            justify-content: center;
-            font-size: 1.1em;
-        }
-
-        .sidebar nav a .label {
-            transition: opacity 0.2s ease;
-        }
-
-        .sidebar.collapsed nav {
-            align-items: center;
-            width: 100%;
-        }
-
-        .sidebar.collapsed nav a {
-            justify-content: center;
-            padding: 0;
-            width: 48px;
-            height: 48px;
-            margin: 0 auto;
-            border-radius: 12px;
-            gap: 0;
-        }
-
-        .sidebar.collapsed nav a .icon {
-            width: 100%;
-            min-width: 0;
-            justify-content: center;
-            text-align: center;
-            line-height: 1;
-        }
-
-        .sidebar.collapsed nav a .label {
-            display: none;
-        }
-
-        .sidebar .toggle-sidebar {
-            background: #2c3e50;
-            color: white;
-            border: none;
-            width: 48px;
-            height: 48px;
-            padding: 0;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 1.2em;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .toggle-sidebar:hover {
-            background: #34495e;
-        }
-
-        .sidebar.collapsed ~ .toggle-sidebar {
-            left: 88px;
-        }
-
         @media (max-width: 768px) {
             .sidebar {
-                width: 200px;
+                width: 150px;
             }
 
-            .sidebar.collapsed {
-                width: 64px;
+            main {
+                margin-right: calc(150px+20px) calc();
+                padding: 15px;
             }
 
-            .sidebar.collapsed ~ .toggle-sidebar {
-                left: 88px;
+            .sidebar.collapsed ~ main {
+                margin-right: 0;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .calendar-iframe-container iframe {
+                height: 500px;
             }
         }
 
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            margin-right: 250px;
+        main {
+            margin-right: calc(150px+20px);
             padding: 20px;
             transition: margin-right 0.3s ease;
         }
 
-        .sidebar.collapsed ~ .main-content {
-            margin-right: 64px;
+        .sidebar.collapsed ~ main {
+            margin-right: 0;
         }
 
         .content-section {
@@ -184,7 +126,6 @@
             display: block;
         }
 
-        /* Calendar Section */
         .calendar-controls {
             margin-bottom: 20px;
             display: flex;
@@ -202,7 +143,7 @@
             font-size: 1em;
             transition: background 0.2s;
         }
-
+        
         .calendar-controls button:hover {
             background: #2980b9;
         }
@@ -225,62 +166,40 @@
             display: block;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-            }
-
-            .main-content {
-                margin-right: 0;
-                padding: 15px;
-            }
-
-            .sidebar.collapsed ~ .main-content {
-                margin-right: 0;
-            }
-
-            .content-section {
-                padding: 20px;
-            }
-
-            .calendar-iframe-container iframe {
-                height: 500px;
-            }
-        }
-
-        h1 {
-            margin-bottom: 20px;
+        h1, h2, h3 {
             color: #2c3e50;
         }
 
         p {
             line-height: 1.6;
         }
+
     </style>
+
 </head>
 <body>
     <div class="sidebar" id="sidebar">
-        <button class="toggle-sidebar" onclick="toggleSidebar()"><span class="icon">☰</span></button>
         <nav>
-            <a onclick="showSection('calendar', event)" class="active"><span class="icon">📅</span><span class="label">Calendar</span></a>
-            <a onclick="showSection('add-event', event)"><span class="icon">➕</span><span class="label">Add Event</span></a>
-            <a onclick="showSection('about', event)"><span class="icon">ℹ️</span><span class="label">About</span></a>
+            <a onclick="showSection('calendar', event)" class="active">Calendar</a>
+            <a onclick="showSection('add-event', event)">Add Event</a>
+            <a onclick="showSection('about', event)">About</a>
         </nav>
     </div>
-    <div class="main-content">
-        <h2>Southeast Michigan Tech Events</h2>
-        <!-- Calendar Section -->
-        <div id="calendar" class="content-section active">
-            <h1>Calendar</h1>
+    <main>
+        <div class="title">
+            <h1>Southeast Michigan Tech Events</h1>
+            <button class="toggle-sidebar" onclick="toggleSidebar()"><span class="icon">☰</span></button>
+        </div>
+        <div class="content-section active" id="calendar">
+            <h2>Calendar</h2>
             <div class="calendar-controls">
-                <button class="view-btn active" onclick="toggleView('calendar')">Calendar View</button>
+                <button class="view-btn active" onClick="toggleView('calendar')">Calendar View</button>
                 <button class="view-btn" onclick="toggleView('list')">List View</button>
             </div>
-            
+
             <div class="calendar-iframe-container">
                 <iframe 
-                    id="month-view"
+                    id="calendar-view"
                     src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDetroit&showPrint=0&mode=MONTH&title=SE%20MI%20Tech&showCalendars=0&src=NDlkNzM4NjkyNmMwNjEyMjJlMzlmYjkzNWE1YjViYTFhNDdmNDU3ZDg2Y2JjNzYwMmIyOGUxOWE5NDBiNmJiMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%239e69af" 
                     frameborder="0" 
                     scrolling="no">
@@ -295,21 +214,36 @@
                     scrolling="no"
                     style="display: none;">
                 </iframe>
-            </div>
         </div>
 
-        <!-- Add Event Section -->
         <div id="add-event" class="content-section">
-            <h1>Add Event</h1>
-            <p>Add event details here.</p>
+            <h2>Add Event</h2>
+            <p>To add an event, email contact@kellancoaching.com.</p>
+            <p>This calendar holds events for:</p>
+            <ul>
+                <li>people in the tech industry,</li>
+                <li>people hiring in the tech industry,</li>
+                <li>people interested in the workings of computers,</li>
+                <li>and their friends,</li>
+                <li>in roughly the Detroit/Ann Arbor area.</li>
+            </ul>
         </div>
 
-        <!-- About Section -->
         <div id="about" class="content-section">
-            <h1>About</h1>
-            <p>About section content here.</p>
+            <h2>About</h2>
+            <p>This website is maintained by Kellan Heth (kellancoaching.com). Thanks to Nick and Ronda for helping me along the way.</p>
+            <p>It is inspired by coolwashtenaw.events and ypsi.gay. Check them out if they're relevant to you!</p>
+            <p>This calendar holds events for:</p>
+            <ul>
+                <li>people in the tech industry,</li>
+                <li>people hiring in the tech industry,</li>
+                <li>people interested in the workings of computers,</li>
+                <li>and their friends,</li>
+                <li>in roughly the Detroit/Ann Arbor area.</li>
+            </ul>
+            <p>Please email contact@kellancoaching.com to add more events!</p>
         </div>
-    </div>
+    </main>
 
     <script>
         function showSection(sectionId, event) {
@@ -322,7 +256,7 @@
             document.querySelectorAll('.sidebar nav a').forEach(link => {
                 link.classList.remove('active');
             });
-            
+
             // Show selected section
             document.getElementById(sectionId).classList.add('active');
             
@@ -344,7 +278,7 @@
         }
 
         function toggleView(view) {
-            const monthView = document.getElementById('month-view');
+            const calendarView = document.getElementById('calendar-view');
             const listView = document.getElementById('list-view');
             const buttons = document.querySelectorAll('.view-btn');
 
