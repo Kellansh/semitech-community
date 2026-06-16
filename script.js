@@ -2,7 +2,7 @@ function showSection(sectionId, event) {
     document.querySelectorAll('.content-section').forEach(section => {
         section.classList.remove('active');
     });
-    document.querySelectorAll('.sidebar nav a').forEach(link => {
+    document.querySelectorAll('.top-nav .nav-link').forEach(link => {
         link.classList.remove('active');
     });
     document.getElementById(sectionId).classList.add('active');
@@ -11,13 +11,6 @@ function showSection(sectionId, event) {
     } else if (event && event.target) {
         event.target.classList.add('active');
     }
-    if (window.innerWidth < 768) {
-        document.getElementById('sidebar').classList.add('collapsed');
-    }
-}
-
-function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('collapsed');
 }
 
 function toggleView(view) {
@@ -29,11 +22,9 @@ function toggleView(view) {
         calendarView.parentElement.style.display = 'block';
         listView.parentElement.style.display = 'none';
         buttons[0].classList.add('active');
-        buttons[1].classList.remove('active');
     } else {
         calendarView.parentElement.style.display = 'none';
         listView.parentElement.style.display = 'block';
-        buttons[0].classList.remove('active');
         buttons[1].classList.add('active');
     }
 }

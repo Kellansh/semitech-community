@@ -6,26 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SEMI Tech Community</title>
     <meta name="description" content="SEMI Tech Community Calendar">
-
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
-        <nav>
-            <a onclick="showSection('calendar', event)" class="active">Calendar</a>
-            <a onclick="showSection('add-event', event)">Add Event</a>
-            <a onclick="showSection('about', event)">About</a>
-        </nav>
-    </div>
-    <main>
-        <div class="title">
-            <h1>Southeast Michigan Tech Events</h1>
-            <button class="toggle-sidebar" onclick="toggleSidebar()"><span class="icon">☰</span></button>
-        </div>
-        <div class="content-section active" id="calendar">
+    <main class="page">
+        <header class="page-header">
+            <div class="page-title">
+                <h1>Southeast Michigan Tech Events</h1>
+            </div>
+            <nav class="top-nav" aria-label="Site sections">
+                <button type="button" class="nav-link active" onclick="showSection('calendar', event)">Calendar</button>
+                <button type="button" class="nav-link" onclick="showSection('add-event', event)">Add Event</button>
+                <button type="button" class="nav-link" onclick="showSection('about', event)">About</button>
+            </nav>
+        </header>
+
+        <section class="content-section active" id="calendar">
             <h2>Calendar</h2>
             <div class="calendar-controls">
-                <button class="view-btn active" onClick="toggleView('calendar')">Calendar View</button>
+                <button class="view-btn active" onclick="toggleView('calendar')">Calendar View</button>
                 <button class="view-btn" onclick="toggleView('list')">List View</button>
             </div>
 
@@ -38,7 +37,7 @@
                 </iframe>
             </div>
 
-            <div class="calendar-iframe-container">
+            <div class="calendar-iframe-container list-view">
                 <iframe 
                     id="list-view"
                     src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDetroit&showPrint=0&mode=AGENDA&title=SE%20MI%20Tech&showCalendars=0&src=NDlkNzM4NjkyNmMwNjEyMjJlMzlmYjkzNWE1YjViYTFhNDdmNDU3ZDg2Y2JjNzYwMmIyOGUxOWE5NDBiNmJiMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%239e69af" 
@@ -46,11 +45,11 @@
                     scrolling="no">
                 </iframe>
             </div>
-        </div>
+        </section>
 
-        <div id="add-event" class="content-section">
+        <section id="add-event" class="content-section">
             <h2>Add Event</h2>
-            <p>To add an event, email contact@kellancoaching.com.</p>
+            <p>To add an event, email <a href="mailto:contact@kellancoaching.com">contact@kellancoaching.com</a>.</p>
             <p>This calendar holds events for:</p>
             <ul>
                 <li>people in the tech industry,</li>
@@ -59,12 +58,12 @@
                 <li>and their friends,</li>
                 <li>in roughly the Detroit/Ann Arbor area.</li>
             </ul>
-        </div>
+        </section>
 
-        <div id="about" class="content-section">
+        <section id="about" class="content-section">
             <h2>About</h2>
-            <p>This website is maintained by Kellan Heth (kellancoaching.com). Thanks to Nick and Ronda for helping me along the way.</p>
-            <p>It is inspired by coolwashtenaw.events and ypsi.gay. Check them out if they're relevant to you!</p>
+            <p>This website is maintained by Kellan Heth (<a href="https://kellancoaching.com">kellancoaching.com</a>). Thanks to Nick and Ronda for helping me along the way.</p>
+            <p>It is inspired by <a href="https://coolwashtenaw.events">coolwashtenaw.events</a> and <a href="https://ypsi.gay">ypsi.gay</a>. Check them out if they're relevant to you!</p>
             <p>This calendar holds events for:</p>
             <ul>
                 <li>people in the tech industry,</li>
@@ -73,8 +72,8 @@
                 <li>and their friends,</li>
                 <li>in roughly the Detroit/Ann Arbor area.</li>
             </ul>
-            <p>Please email contact@kellancoaching.com to add more events!</p>
-        </div>
+            <p>Please email <a href="mailto:contact@kellancoaching.com">contact@kellancoaching.com</a> to add more events!</p>
+        </section>
     </main>
 
     <script src="script.js"></script>
